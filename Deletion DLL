@@ -1,0 +1,31 @@
+class Solution:
+    def delete_node(self, head, x):
+        # If the list is empty
+        if not head:
+            return None
+
+        # If the head is to be deleted
+        if x == 1:
+            next_node = head.next
+            if next_node:
+                next_node.prev = None
+            return next_node  # new head
+
+        # Traverse to the node to be deleted
+        current = head
+        count = 1
+        while current and count < x:
+            current = current.next
+            count += 1
+
+        # If the node to be deleted is not found
+        if not current:
+            return head
+
+        # Unlink the node
+        if current.prev:
+            current.prev.next = current.next
+        if current.next:
+            current.next.prev = current.prev
+
+        return head
