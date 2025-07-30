@@ -1,0 +1,18 @@
+class Solution:
+    def getKthFromLast(self, head, k):
+        fast = head
+        slow = head
+
+        # Move fast k steps ahead
+        for _ in range(k):
+            if not fast:
+                return -1  # k is more than number of nodes
+            fast = fast.next
+
+        # Move both pointers until fast reaches the end
+        while fast:
+            slow = slow.next
+            fast = fast.next
+
+        # slow now points to kth node from end
+        return slow.data if slow else -1
