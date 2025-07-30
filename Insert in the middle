@@ -1,0 +1,41 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def insertInMiddle(self, head, x):
+        new_node = Node(x)
+
+        # Empty list
+        if not head:
+            return new_node
+
+        slow = head
+        fast = head
+        prev = None
+
+        # Use slow/fast pointers to find middle
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+
+        # If length is even (fast is None), insert before slow (prev)
+        # If length is odd (fast not None), insert after slow
+
+        if fast is None:
+            # Even length: insert before middle node (slow)
+            if prev:
+                prev.next = new_node
+                new_node.next = slow
+            else:
+                # Only two nodes, insert at beginning
+                new_node.next = head
+                head = new_node
+        else:
+            # Odd length: insert after middle node (slow)
+            new_node.next = slow.next
+            slow.next = new_node
+
+        return head
