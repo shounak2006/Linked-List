@@ -1,0 +1,45 @@
+'''
+# node class:
+
+class Node:
+    def __init__(self,val):
+        self.next=None
+        self.data=val
+
+'''
+
+class Solution:
+    #Function to remove a loop in the linked list.
+    def removeLoop(self, head):
+        if head is None or head.next is None:
+            return
+        
+        slow = head
+        fast = head
+        
+        # Detect loop using Floyd’s cycle detection
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        
+        # If no loop found, return
+        if slow != fast:
+            return
+        
+        # Move slow to head
+        slow = head
+        
+        # If loop starts at head node
+        if slow == fast:
+            while fast.next != slow:
+                fast = fast.next
+        else:
+            # Move both pointers at same speed till fast.next == slow.next
+            while slow.next != fast.next:
+                slow = slow.next
+                fast = fast.next
+        
+        # Remove loop
+        fast.next = None
