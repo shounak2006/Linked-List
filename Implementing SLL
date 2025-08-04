@@ -1,0 +1,32 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def insertEnd(self, head, x):
+        new_node = Node(x)
+        if head is None:
+            return new_node
+        current = head
+        while current.next is not None:
+            current = current.next
+        current.next = new_node
+        return head
+
+
+
+# Create a linked list: 1 -> 2 -> 3
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+
+sol = Solution()
+head = sol.insertEnd(head, 4)
+
+
+current = head
+while current:
+    print(current.data, end=" -> ")
+    current = current.next
+print("None")
