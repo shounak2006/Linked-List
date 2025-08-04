@@ -1,0 +1,27 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def string_to_linked_list(s):
+    if not s:
+        return None 
+
+    head = Node(s[0])
+    current = head
+    for char in s[1:]:
+        current.next = Node(char)
+        current = current.next
+    return head
+
+
+
+input_string = "hello"
+head = string_to_linked_list(input_string)
+
+# Print the linked list
+current = head
+while current:
+    print(current.data, end=" -> ")
+    current = current.next
+print("None")
