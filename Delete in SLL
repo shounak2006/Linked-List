@@ -1,0 +1,62 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def insertEnd(self, head, data):
+        new_node = Node(data)
+        if head is None:
+            return new_node
+        current = head
+        while current.next:
+            current = current.next
+        current.next = new_node
+        return head
+
+    def deleteNode(self, head, key):
+        # If list is empty
+        if head is None:
+            print("List is empty.")
+            return head
+
+        # If head needs to be deleted
+        if head.data == key:
+            return head.next
+
+        current = head
+        while current.next is not None:
+            if current.next.data == key:
+                current.next = current.next.next
+                return head
+            current = current.next
+        
+        print(f"Value {key} not found in the list.")
+        return head
+
+    def printList(self, head):
+        current = head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+
+sol = Solution()
+head = None
+
+# Create a list
+for val in [10, 20, 30, 40, 50]:
+    head = sol.insertEnd(head, val)
+
+print("Original list:")
+sol.printList(head)
+
+# Delete node with value 30
+head = sol.deleteNode(head, 30)
+
+print("List after deleting 30:")
+sol.printList(head)
+
+# Try deleting a value not in list
+head = sol.deleteNode(head, 100)
