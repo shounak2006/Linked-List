@@ -1,0 +1,46 @@
+class Node:
+    def __init__(self, height, weight):
+        self.height = height
+        self.weight = weight
+        self.next = None
+
+class Solution:
+    def insertEnd(self, head, height, weight):
+        new_node = Node(height, weight)
+        if head is None:
+            return new_node
+        current = head
+        while current.next is not None:
+            current = current.next
+        current.next = new_node
+        return head
+
+    def highest_weight_height_ratio(self, head):
+        if head is None:
+            return None  # No students
+
+        max_ratio = head.weight / head.height
+        current = head.next
+        while current:
+            ratio = current.weight / current.height
+            if ratio > max_ratio:
+                max_ratio = ratio
+            current = current.next
+        return max_ratio
+
+
+sol = Solution()
+head = None
+
+N = int(input("Enter number of students: "))
+
+for i in range(N):
+    h = float(input(f"Enter height of student {i+1} (in meters): "))
+    w = float(input(f"Enter weight of student {i+1} (in kg): "))
+    head = sol.insertEnd(head, h, w)
+
+max_ratio = sol.highest_weight_height_ratio(head)
+if max_ratio is not None:
+    print(f"The highest weight/height ratio is: {max_ratio:.2f}")
+else:
+    print("No students data entered.")
