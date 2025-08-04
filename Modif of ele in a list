@@ -1,0 +1,59 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    def insertEnd(self, head, data):
+        new_node = Node(data)
+        if head is None:
+            return new_node
+        current = head
+        while current.next:
+            current = current.next
+        current.next = new_node
+        return head
+
+    def modifyElement(self, head, position, new_data):
+        if head is None:
+            print("List is empty.")
+            return head
+
+        current = head
+        count = 0
+
+        while current is not None:
+            if count == position:
+                current.data = new_data
+                return head
+            current = current.next
+            count += 1
+        
+        print("Position out of range.")
+        return head
+
+    def printList(self, head):
+        current = head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+
+
+sol = Solution()
+head = None
+
+for val in [10, 20, 30, 40, 50]:
+    head = sol.insertEnd(head, val)
+
+print("Original list:")
+sol.printList(head)
+
+
+pos = 2
+new_val = 99
+head = sol.modifyElement(head, pos, new_val)
+
+print(f"List after modifying element at position {pos} to {new_val}:")
+sol.printList(head)
