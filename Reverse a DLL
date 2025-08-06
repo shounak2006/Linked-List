@@ -1,0 +1,15 @@
+class Solution:
+    def reverseDLL(self, head):
+        if not head:
+            return None
+        
+        current = head
+        while current:
+            # Swap next and prev
+            current.prev, current.next = current.next, current.prev
+            
+            # Move to the next node in the original list (which is prev now)
+            head = current
+            current = current.prev  # since next and prev are swapped
+
+        return head
