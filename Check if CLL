@@ -1,0 +1,11 @@
+class Solution:
+    def isCircular(self, head):
+        if head is None:
+            return False
+
+        current = head.next
+
+        while current is not None and current != head:
+            current = current.next
+
+        return current == head
